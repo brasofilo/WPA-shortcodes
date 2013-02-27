@@ -1,0 +1,28 @@
+{
+  "name": "WordPress Answers Comments Shortcodes",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "WordPress Answers Comments Shortcodes",
+  "homepage_url": "https://github.com/bainternet/WPA-shortcodes",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "options_page": "src/options_custom/index.html",
+  "permissions": [
+     "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+         "http://wordpress.stackexchange.com/*",
+          "http://*.wordpress.stackexchange.com/*" 
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}
