@@ -1,7 +1,3 @@
-
-// Saves options to localStorage.
-
-
 // Restores select box state to saved value from localStorage.
 function restore_options() {
   var favorite = localStorage["favorite_color"];
@@ -18,10 +14,6 @@ function restore_options() {
   }
 }
 
-function add_shortcode(countr){
-    var html = '<div class="shortcode"><label>Tag Name<input type="text" name="sh[counter][tagname]" value=""></label><br /><label>Tag Value<textarea name="sh[counter][tagvalue]" cols="68" rows="3"></textarea></label><input type="submit" value="Remove shortcode" class="remove"></div>';
-    $("#mainfrom").append(replaceall(html,'counter',countr));
-}
 var dynamic = (function(){
     var instantiated;
     function init (){
@@ -40,7 +32,6 @@ var dynamic = (function(){
                 tval = tval || '';
                 var html = '<div class="shortcode"><label>Tag Name<input type="text" name="sh[counter][tagname]" value="'+tag+'"></label><br /><label>Tag Value<textarea name="sh[counter][tagvalue]" cols="68" rows="3">'+tval+'</textarea></label><input type="submit" value="Remove shortcode" class="remove"></div>';
                 $("#mainfrom").append(instantiated.replaceall('counter',instantiated.count,html));
-                //$("#mainfrom").append(instantiated.count);
             },
             replaceall: function(find, replace, str) {
                 return str.replace(new RegExp(find, 'g'), replace);
@@ -88,7 +79,7 @@ var dynamic = (function(){
 })();
 
 $(function () {
-     dynamic.getInstance().load_saved();
+    dynamic.getInstance().load_saved();
     $("#btnAdd").click(function(){
         dynamic.getInstance().add()
     });
