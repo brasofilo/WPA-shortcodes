@@ -15,12 +15,17 @@ function main() {
 				add_autolink:function(){
 					QJ(".comment-help-link").each(function(){
 					    if (QJ(this).next().attr('class') != 'shortcode')
-					      	QJ(this).after('| <a class="shortcode" href="#">ShortCodes</a><img class="workingIMG" src="'+chrome.extension.getURL("src/loading.gif")+'" style="display:none">');
+					      	QJ(this).after('| <a class="shortcode" href="#">ShortCodes</a><img class="workingIMG" src="'+chrome.extension.getURL("src/loading.gif")+'" style="display:none"> | <a class="shortcodeoptions" href="#">settings</a>');
 					});
 				   	QJ(".shortcode").on('click',function(event){
 					    event.preventDefault();
 					    QJ(this).next().show();
 					    instantiated.translate_shortcodes(QJ(this));
+					    return false;
+					});
+					QJ(".shortcodeoptions").on('click',function(event){
+					    event.preventDefault();
+					    window.open(chrome.extension.getURL("src/options_custom/index.html"));
 					    return false;
 					});
 				},
