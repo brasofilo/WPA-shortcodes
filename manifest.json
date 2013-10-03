@@ -12,8 +12,7 @@
   "default_locale": "en",
   "options_page": "src/options_custom/index.html",
   "permissions": [
-    "http://wordpress.stackexchange.com/*",
-    "http://*.wordpress.stackexchange.com/*" 
+    "http://*/*","https://*/*"
   ],
   "background": {
     "scripts": ["src/options_custom/js/jquery.min.js", "src/background.js"],
@@ -25,8 +24,7 @@
   "content_scripts": [
     {
       "matches": [
-        "http://wordpress.stackexchange.com/*",
-        "http://*.wordpress.stackexchange.com/*" 
+       "http://*/*","https://*/*"
       ],
       "js": [
         "src/options_custom/js/jquery.min.js",
