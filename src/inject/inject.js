@@ -85,7 +85,7 @@ function main() {
 	})();
 
   	QJ(".comments-link").on('click',function(){
-    	Singleton.getInstance().add_autolink();
+    	setTimeout(function(){Singleton.getInstance().add_autolink();},500);
   	});
   	chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 	  	if (msg.action == 'saved_data') {
