@@ -1,36 +1,44 @@
 {
-  "name": "WordPress Answers Comments Shortcodes",
-  "version": "0.0.1",
-  "manifest_version": 2,
-  "description": "WordPress Answers Comments Shortcodes",
-  "homepage_url": "http://en.bainternet.info",
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  },
-  "default_locale": "en",
-  "options_page": "src/options_custom/index.html",
-  "permissions": [
-    "http://*/*","https://*/*"
-  ],
-  "background": {
-    "scripts": ["src/options_custom/js/jquery.min.js", "src/background.js"],
-    "persistent": false
-  },
-  "web_accessible_resources": [
-    "src/loading.gif"
-  ],
-  "content_scripts": [
+    "name": "Stack Exchange Comments Shortcodes",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "Create custom shortcodes to use in SE comments. Define your own [magic-links].",
+    "homepage_url": "http://en.bainternet.info",
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "default_locale": "en",
+    "options_page": "src/options_custom/index.html",
+    "permissions": [
+        "*://*.askubuntu.com/questions/*", 
+        "*://*.mathoverflow.net/questions/*", 
+        "*://*.serverfault.com/questions/*", 
+        "*://*.stackapps.com/questions/*", 
+        "*://*.stackexchange.com/questions/*", 
+        "*://*.stackoverflow.com/questions/*", 
+        "*://*.superuser.com/questions/*"          
+    ],
+    "background": {
+        "scripts": ["src/options_custom/js/jquery.211.min.js", "src/options_custom/js/sizzle.js", "src/background.js"],
+        "persistent": false
+    },
+    "web_accessible_resources": [
+        "icons/icon19.png",
+        "icons/icon128.png",
+        "src/loading.gif",
+        "src/options_custom/index.html"
+    ],
+    "content_scripts": [
     {
-      "matches": [
-       "http://*/*","https://*/*"
-      ],
-      "js": [
-        "src/options_custom/js/jquery.min.js",
-        "src/inject/inject.js"
-      ],
-      "run_at": "document_end"
+        "matches": [ "http://*/*","https://*/*" ],
+        "include_globs": [],
+        "js": [
+            "src/options_custom/js/jquery.min.js",
+            "src/inject/inject.js"
+        ],
+        "run_at": "document_end"
     }
-  ]
+    ]
 }
