@@ -1,19 +1,27 @@
-// Restores select box state to saved value from localStorage.
-function restore_options() {
-  var favorite = localStorage["favorite_color"];
-  if (!favorite) {
-    return;
-  }
-  var select = document.getElementById("color");
-  for (var i = 0; i < select.children.length; i++) {
-    var child = select.children[i];
-    if (child.value == favorite) {
-      child.selected = "true";
-      break;
-    }
-  }
+/**
+ * Get url query var
+ * http://stackoverflow.com/a/901144/1287812
+ */
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+var currentSite = getParameterByName('site');
+if( currentSite ) {
+	document.write("<link rel='shortcut icon' href='http://cdn.sstatic.net/"+currentSite+"/img/favicon.ico'>");
+	document.write("<link rel='stylesheet' href='http://cdn.sstatic.net/"+currentSite+"/all.css' type='text/css'>");
+}
+else {
+	document.write("<link rel='shortcut icon' href='" + chrome.extension.getURL("icons/icon19.png") + "'>");
+	document.write("<link rel='stylesheet' href='http://cdn.sstatic.net/wordpress/all.css' type='text/css'>");
+}
+
+/**
+ * Instantiate comment shortcode
+ */
 var dynamic = (function(){
     var instantiated;
     function init (){
@@ -30,7 +38,7 @@ var dynamic = (function(){
             addShortcode: function(tag,tval){
                 tag = tag || '';
                 tval = tval || '';
-                var html = '<div class="shortcode"><label>Tag Name<input type="text" name="sh[counter][tagname]" value="'+tag+'"></label><br /><label>Tag Value<textarea name="sh[counter][tagvalue]" cols="68" rows="3">'+tval+'</textarea></label><input type="submit" value="Remove shortcode" class="remove"></div>';
+                var html = '<div class="shortcode"><label>Name&nbsp;&nbsp;&nbsp;<input type="text" name="sh[counter][tagname]" value="'+tag+'" placeholder="Don\'t add brackets here"></label><br /><label>Content<textarea name="sh[counter][tagvalue]" cols="68" rows="3" placeholder="It\' possible to add SE magic links here">'+tval+'</textarea></label><input type="submit" value="Remove shortcode" class="remove"></div>';
                 $("#mainfrom").append(instantiated.replaceall('counter',instantiated.count,html));
             },
             replaceall: function(find, replace, str) {
@@ -48,10 +56,9 @@ var dynamic = (function(){
                 localStorage.wpa_settings = JSON.stringify(save);
                 
                 // Update status to let user know options were saved.
-                var status = document.getElementById("status");
-                status.innerHTML = "Options Saved.";
+                $('#save').attr('value', "Options Saved" );
                 setTimeout(function() {
-                    status.innerHTML = "";
+                    $('#save').attr('value',"Save Settings");
                 }, 750);
             },
             load_saved: function(){
@@ -79,6 +86,7 @@ var dynamic = (function(){
 })();
 
 $(function () {
+    $('#hlogo a').text(getParameterByName('site'));
     dynamic.getInstance().load_saved();
     $("#btnAdd").click(function(){
         dynamic.getInstance().add()
