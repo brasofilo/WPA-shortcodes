@@ -1,3 +1,28 @@
 .shortcode{
 	border-bottom: 1px dotted #B8B8B8;
+	padding: 10px 10px 3px;
+}
+input[type=text], textarea {
+    border: 1px solid #E2E2E2 !important;
+    margin: -4px 10px 10px;
+    padding: 2px;
+}
+input[type="text"] {
+    width: 20%;
+}
+input[type=button]:focus, input[type=submit]:focus {
+    outline:0;
+}
+label {
+    vertical-align: top !important;
+}
+input.remove {
+    position: absolute;
+    margin: 22px 0 0px 10px;
+}
+.addb {
+    margin: 0 0 7px 13px;
+}
+#hmenus { 
+    opacity: 0.01 
 }
